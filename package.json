@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Fei Yang",
   "license": "MIT",
   "dependencies": {
-    "tronweb": "^2.1.14"
+    "tronweb": "^2.1.14",
+    "yargs": "^12.0.5"
   }
 }
