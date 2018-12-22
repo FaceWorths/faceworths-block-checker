@@ -23,10 +23,25 @@ const factory = contracts['FaceWorthPollFactory'];
 
 const factoryContract = tronWeb.contract(factory.abi, factory.address);
 
-const activeGames = {};
+const activeGames = new Map();
 
 factoryContract.FaceWorthPollCreated().watch((err, {result}) => {
   if (err) return console.error('Failed to bind event listener:', err);
-  console.log('Detected new poll:', result.hash);
-  activeGames[result.hash] = result.hash;
+  console.log('Detected new poll:', result);
+  activeGames.set(result.hash, setInterval(()=>{
+    factoryContract.checkBlockNumber('0x' + result.hash).send({
+      shouldPollResponse: false,
+      callValue: 0,
+      feeLimit: 1000000000
+    });
+  }, 3000));
+});
+
+factoryContract.StageChange().watch((err, {result}) => {
+  if (err) return console.error('Failed to bind event listener:', err);
+  console.log('Detected stage change:', result);
+  if (result.newStage > 2) {
+    clearInterval(activeGames.get(result.hash));
+    activeGames.delete(result.hash);
+  }
 });
