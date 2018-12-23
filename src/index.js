@@ -41,6 +41,7 @@ factoryContract.StageChange().watch((err, {result}) => {
   if (err) return console.error('Failed to bind event listener:', err);
   console.log('Detected stage change:', result);
   if (result.newStage > 2) {
+    console.log('clear block checker for', result.hash);
     clearInterval(activeGames.get(result.hash));
     activeGames.delete(result.hash);
   }
