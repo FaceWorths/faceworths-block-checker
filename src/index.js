@@ -23,8 +23,6 @@ const factory = contracts['FaceWorthPollFactory'];
 
 const factoryContract = tronWeb.contract(factory.abi, factory.address);
 
-const activeGames = new Map();
-
 function check(hash) {
   console.log(new Date(), 'Checking Block Number for ', hash)
   factoryContract.checkBlockNumber(`0x${hash}`).send({
