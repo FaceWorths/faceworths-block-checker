@@ -25,24 +25,40 @@ const factoryContract = tronWeb.contract(factory.abi, factory.address);
 
 const activeGames = new Map();
 
+function check(hash) {
+  console.log(new Date(), 'Checking Block Number for ', hash)
+  factoryContract.checkBlockNumber(`0x${hash}`).send({
+    shouldPollResponse: false,
+    callValue: 0,
+    feeLimit: 1000000000
+  });
+ }
+
 factoryContract.FaceWorthPollCreated().watch((err, {result}) => {
   if (err) return console.error('Failed to bind event listener:', err);
-  console.log('Detected new poll:', result);
-  activeGames.set(result.hash, setInterval(()=>{
-    factoryContract.checkBlockNumber('0x' + result.hash).send({
-      shouldPollResponse: false,
-      callValue: 0,
-      feeLimit: 1000000000
-    });
-  }, 3000));
-});
-
-factoryContract.StageChange().watch((err, {result}) => {
-  if (err) return console.error('Failed to bind event listener:', err);
-  console.log('Detected stage change:', result);
-  if (result.newStage > 2) {
-    console.log('clear block checker for', result.hash);
-    clearInterval(activeGames.get(result.hash));
-    activeGames.delete(result.hash);
-  }
+  console.log(new Date(), 'Detected new poll:', result);
+  let checkPointOne = Number(result.commitEndBlock) + 1;
+  console.log('checkPointOne', checkPointOne);
+  let checkPointTwo = Number(result.revealEndBlock) + 1;
+  console.log('checkPointTwo', checkPointTwo);
+  let hash = result.hash;
+  let watcher = setInterval(async () => {
+    let currentBlock = await factoryContract.getCurrentBlock().call();
+    let currentBlockNumber = currentBlock.toNumber();
+    if (currentBlockNumber >= checkPointOne) {
+      let currentStage = await factoryContract.getCurrentStage(`0x${hash}`);
+      console.log('currentStage', currentStage);
+      if (currentStage === 1) {
+        check(hash);
+      }
+    } else if (currentBlockNumber >= checkPointTwo) {
+      let currentStage = await factoryContract.getCurrentStage(`0x${hash}`);
+      console.log('currentStage', currentStage);
+      if (currentStage === 2) {
+        check(hash);
+      } else {
+        clearInterval(watcher);
+      }
+    }
+  }, 3000);
 });
