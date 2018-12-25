@@ -50,12 +50,10 @@ factoryContract.FaceWorthPollCreated().watch((err, {result}) => {
       console.log('currentStage', currentStage);
       if (currentStage === 1) {
         check(hash);
-      }
-    } else if (currentBlockNumber >= checkPointTwo) {
-      let currentStage = await factoryContract.getCurrentStage(`0x${hash}`);
-      console.log('currentStage', currentStage);
-      if (currentStage === 2) {
-        check(hash);
+      } else if (currentStage === 2) {
+        if (currentBlockNumber >= checkPointTwo) {
+          check(hash);
+        }
       } else {
         clearInterval(watcher);
       }
