@@ -44,7 +44,7 @@ factoryContract.FaceWorthPollCreated().watch((err, {result}) => {
     let currentBlock = await factoryContract.getCurrentBlock().call();
     let currentBlockNumber = currentBlock.toNumber();
     if (currentBlockNumber >= checkPointOne) {
-      let currentStage = await factoryContract.getCurrentStage(`0x${hash}`);
+      let currentStage = await factoryContract.getCurrentStage(`0x${hash}`).call();
       console.log('currentStage', currentStage);
       if (currentStage === 1) {
         check(hash);
