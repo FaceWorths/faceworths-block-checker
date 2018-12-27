@@ -1,5 +1,5 @@
 {"FaceToken": {
-  "address": "41e79e2eed831fdb27749f2ad9c72b8bdfa787de51",
+  "address": "41c00f0e9cefdf66179d5a90af9344c61582ed4763",
   "abi": [
     {
       "constant": true,
@@ -301,7 +301,7 @@
     }
   ]},
   "FaceWorthPollFactory": {
-    "address": "41ffe7730c8608f9a86436a09db7984de1e4b50873",
+    "address": "41c9ac376fe16b3ffb16877f8dc41f53e339b40df8",
     "abi": [
       {
         "constant": true,
