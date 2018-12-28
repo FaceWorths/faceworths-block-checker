@@ -1,5 +1,5 @@
 {"FaceToken": {
-  "address": "41c00f0e9cefdf66179d5a90af9344c61582ed4763",
+  "address": "413dedb6ab6047e3825df2fa3ee7d8f344407e56e4",
   "abi": [
     {
       "constant": true,
@@ -301,7 +301,7 @@
     }
   ]},
   "FaceWorthPollFactory": {
-    "address": "41c9ac376fe16b3ffb16877f8dc41f53e339b40df8",
+    "address": "418f48099a4d6795207049757d28dd42da20492769",
     "abi": [
       {
         "constant": true,
@@ -1109,6 +1109,10 @@
         ],
         "name": "getStatus",
         "outputs": [
+          {
+            "name": "creator_",
+            "type": "address"
+          },
           {
             "name": "commitTimeLapsed_",
             "type": "uint256"
