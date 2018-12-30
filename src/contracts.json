@@ -1,5 +1,5 @@
 {"FaceToken": {
-  "address": "413dedb6ab6047e3825df2fa3ee7d8f344407e56e4",
+  "address": "41079cebed09196adc12e8c88923e06d006b3f1ac5",
   "abi": [
     {
       "constant": true,
@@ -301,7 +301,7 @@
     }
   ]},
   "FaceWorthPollFactory": {
-    "address": "418f48099a4d6795207049757d28dd42da20492769",
+    "address": "419505159fce714f4d8070c176de7b0d693151b253",
     "abi": [
       {
         "constant": true,
@@ -325,20 +325,6 @@
           {
             "name": "",
             "type": "address"
-          }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-      },
-      {
-        "constant": true,
-        "inputs": [],
-        "name": "topFaceWorthCount",
-        "outputs": [
-          {
-            "name": "",
-            "type": "uint8"
           }
         ],
         "payable": false,
@@ -390,7 +376,7 @@
       {
         "constant": true,
         "inputs": [],
-        "name": "minBlocksBeforeEnd",
+        "name": "stake",
         "outputs": [
           {
             "name": "",
@@ -404,7 +390,7 @@
       {
         "constant": true,
         "inputs": [],
-        "name": "stake",
+        "name": "minWaitBlocks",
         "outputs": [
           {
             "name": "",
@@ -510,26 +496,31 @@
         "type": "function"
       },
       {
+        "constant": true,
+        "inputs": [
+          {
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "name": "topFaces",
+        "outputs": [
+          {
+            "name": "",
+            "type": "bytes32"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
         "constant": false,
         "inputs": [],
         "name": "acceptOwnership",
         "outputs": [],
         "payable": false,
         "stateMutability": "nonpayable",
-        "type": "function"
-      },
-      {
-        "constant": true,
-        "inputs": [],
-        "name": "minBlocksBeforeReveal",
-        "outputs": [
-          {
-            "name": "",
-            "type": "uint256"
-          }
-        ],
-        "payable": false,
-        "stateMutability": "view",
         "type": "function"
       },
       {
@@ -582,11 +573,44 @@
       {
         "constant": true,
         "inputs": [],
+        "name": "topFaceCount",
+        "outputs": [
+          {
+            "name": "",
+            "type": "uint8"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
         "name": "CANCELLED",
         "outputs": [
           {
             "name": "",
             "type": "uint8"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [
+          {
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "name": "topWinnersRank",
+        "outputs": [
+          {
+            "name": "",
+            "type": "uint256"
           }
         ],
         "payable": false,
@@ -643,25 +667,6 @@
           {
             "name": "",
             "type": "uint256"
-          }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-      },
-      {
-        "constant": true,
-        "inputs": [
-          {
-            "name": "",
-            "type": "uint256"
-          }
-        ],
-        "name": "topFaceWorth",
-        "outputs": [
-          {
-            "name": "",
-            "type": "bytes32"
           }
         ],
         "payable": false,
@@ -766,40 +771,6 @@
         "inputs": [
           {
             "indexed": false,
-            "name": "newMinParticipants",
-            "type": "uint256"
-          },
-          {
-            "indexed": false,
-            "name": "oldMinParticipants",
-            "type": "uint256"
-          }
-        ],
-        "name": "MinParticipantsUpdate",
-        "type": "event"
-      },
-      {
-        "anonymous": false,
-        "inputs": [
-          {
-            "indexed": false,
-            "name": "newMaxParticipants",
-            "type": "uint256"
-          },
-          {
-            "indexed": false,
-            "name": "oldMaxParticipants",
-            "type": "uint256"
-          }
-        ],
-        "name": "MaxParticipantsUpdate",
-        "type": "event"
-      },
-      {
-        "anonymous": false,
-        "inputs": [
-          {
-            "indexed": false,
             "name": "newWinnersPerThousand",
             "type": "uint256"
           },
@@ -834,33 +805,16 @@
         "inputs": [
           {
             "indexed": false,
-            "name": "newMinBlocksBeforeReveal",
+            "name": "newMinWaitBlocks",
             "type": "uint256"
           },
           {
             "indexed": false,
-            "name": "oldMinBlocksBeforeReveal",
+            "name": "oldMinWaitBlocks",
             "type": "uint256"
           }
         ],
-        "name": "MinBlocksBeforeRevealUpdate",
-        "type": "event"
-      },
-      {
-        "anonymous": false,
-        "inputs": [
-          {
-            "indexed": false,
-            "name": "newMinBlocksBeforeUpdate",
-            "type": "uint256"
-          },
-          {
-            "indexed": false,
-            "name": "oldMinBlocksBeforeUpdate",
-            "type": "uint256"
-          }
-        ],
-        "name": "MinBlocksBeforeEndUpdate",
+        "name": "MinWaitBlocksUpdate",
         "type": "event"
       },
       {
@@ -977,6 +931,28 @@
         "anonymous": false,
         "inputs": [
           {
+            "indexed": false,
+            "name": "hash",
+            "type": "bytes32"
+          },
+          {
+            "indexed": false,
+            "name": "newRevealEndBlock",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "name": "oldRevealEndBlock",
+            "type": "uint256"
+          }
+        ],
+        "name": "EarlyReveal",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
             "indexed": true,
             "name": "_from",
             "type": "address"
@@ -998,11 +974,7 @@
             "type": "bytes32"
           },
           {
-            "name": "_blocksBeforeReveal",
-            "type": "uint256"
-          },
-          {
-            "name": "_blocksBeforeEnd",
+            "name": "_waitBlocks",
             "type": "uint256"
           }
         ],
@@ -1110,77 +1082,39 @@
         "name": "getStatus",
         "outputs": [
           {
-            "name": "creator_",
+            "name": "creator",
             "type": "address"
           },
           {
-            "name": "commitTimeLapsed_",
+            "name": "startBlock",
             "type": "uint256"
           },
           {
-            "name": "revealTimeLapsed_",
+            "name": "commitEndBlock",
             "type": "uint256"
           },
           {
-            "name": "commitBlocksLeft_",
+            "name": "revealEndBlock",
             "type": "uint256"
           },
           {
-            "name": "revealBlocksLeft_",
+            "name": "currentBlock",
             "type": "uint256"
           },
           {
-            "name": "currentStage_",
+            "name": "currentStage",
             "type": "uint8"
           },
           {
-            "name": "participantCount_",
+            "name": "participantCount",
             "type": "uint256"
           },
           {
-            "name": "revealCount_",
+            "name": "revealCount",
             "type": "uint256"
           },
           {
-            "name": "totalWorth_",
-            "type": "uint256"
-          }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-      },
-      {
-        "constant": true,
-        "inputs": [
-          {
-            "name": "_hash",
-            "type": "bytes32"
-          }
-        ],
-        "name": "getCommitTimeElapsed",
-        "outputs": [
-          {
-            "name": "",
-            "type": "uint256"
-          }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-      },
-      {
-        "constant": true,
-        "inputs": [
-          {
-            "name": "_hash",
-            "type": "bytes32"
-          }
-        ],
-        "name": "getRevealTimeElapsed",
-        "outputs": [
-          {
-            "name": "",
+            "name": "totalWorth",
             "type": "uint256"
           }
         ],
@@ -1357,24 +1291,6 @@
         "constant": false,
         "inputs": [
           {
-            "name": "_minParticipants",
-            "type": "uint256"
-          },
-          {
-            "name": "_maxParticipants",
-            "type": "uint256"
-          }
-        ],
-        "name": "updateParticipantsRange",
-        "outputs": [],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
-      },
-      {
-        "constant": false,
-        "inputs": [
-          {
             "name": "_winnersPerThousand",
             "type": "uint256"
           },
@@ -1393,25 +1309,11 @@
         "constant": false,
         "inputs": [
           {
-            "name": "_minBlocksBeforeReveal",
+            "name": "_minWaitBlocks",
             "type": "uint256"
           }
         ],
-        "name": "updateMinBlocksBeforeReveal",
-        "outputs": [],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
-      },
-      {
-        "constant": false,
-        "inputs": [
-          {
-            "name": "_minBlocksBeforeEnd",
-            "type": "uint256"
-          }
-        ],
-        "name": "updateMinBlocksBeforeEnd",
+        "name": "updateMinWaitBlocks",
         "outputs": [],
         "payable": false,
         "stateMutability": "nonpayable",
