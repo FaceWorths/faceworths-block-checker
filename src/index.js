@@ -23,8 +23,8 @@ const factory = contracts['FaceWorthPollFactory'];
 
 const factoryContract = tronWeb.contract(factory.abi, factory.address);
 
-function check(hash) {
-  console.log(new Date(), 'Checking Block Number for ', hash)
+function check(hash, block) {
+  console.log(new Date(), 'Checking Block Number for ', hash, 'at block', block);
   factoryContract.checkBlockNumber(`0x${hash}`).send({
     shouldPollResponse: false,
     callValue: 0,
@@ -42,15 +42,13 @@ factoryContract.FaceWorthPollCreated().watch((err, {result}) => {
   let hash = result.hash;
   let watcher = setInterval(async () => {
     let currentBlock = await factoryContract.getCurrentBlock().call();
-    let currentBlockNumber = currentBlock.toNumber();
-    if (currentBlockNumber >= checkPointOne) {
+    if (currentBlock >= checkPointOne) {
       let currentStage = await factoryContract.getCurrentStage(`0x${hash}`).call();
-      console.log('currentStage', currentStage);
       if (currentStage === 1) {
-        check(hash);
+        check(hash, currentBlock.toNumber());
       } else if (currentStage === 2) {
-        if (currentBlockNumber >= checkPointTwo) {
-          check(hash);
+        if (currentBlock >= checkPointTwo) {
+          check(hash, currentBlock.toNumber);
         }
       } else {
         clearInterval(watcher);
