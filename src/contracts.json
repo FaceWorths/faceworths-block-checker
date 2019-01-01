@@ -1,5 +1,5 @@
 {"FaceToken": {
-  "address": "4159b72649c501148fef71ab658296631f81724d78",
+  "address": "41fb2da3ea4e158e88319e3e8cbd03372044530f0c",
   "abi": [
     {
       "constant": true,
@@ -301,7 +301,7 @@
     }
   ]},
   "FaceWorthPollFactory": {
-    "address": "414d353d12da80b4efe170c699852207e1138af098",
+    "address": "41d083536fddba10bd8c39fdc0efcbc0b9a7a67988",
     "abi": [
       {
         "constant": true,
@@ -403,20 +403,6 @@
       },
       {
         "constant": true,
-        "inputs": [],
-        "name": "oneFace",
-        "outputs": [
-          {
-            "name": "",
-            "type": "uint256"
-          }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-      },
-      {
-        "constant": true,
         "inputs": [
           {
             "name": "",
@@ -489,6 +475,25 @@
           {
             "name": "",
             "type": "address"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [
+          {
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "name": "totalPrizeTo",
+        "outputs": [
+          {
+            "name": "",
+            "type": "uint256"
           }
         ],
         "payable": false,
@@ -684,13 +689,8 @@
       },
       {
         "constant": true,
-        "inputs": [
-          {
-            "name": "",
-            "type": "address"
-          }
-        ],
-        "name": "totalPrizeBy",
+        "inputs": [],
+        "name": "tenFaces",
         "outputs": [
           {
             "name": "",
@@ -754,6 +754,33 @@
         "inputs": [
           {
             "indexed": false,
+            "name": "hash",
+            "type": "bytes32"
+          },
+          {
+            "indexed": false,
+            "name": "newStage",
+            "type": "uint8"
+          },
+          {
+            "indexed": false,
+            "name": "oldStage",
+            "type": "uint8"
+          },
+          {
+            "indexed": false,
+            "name": "blockNumber",
+            "type": "uint256"
+          }
+        ],
+        "name": "StageChange",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
             "name": "newStake",
             "type": "uint256"
           },
@@ -798,155 +825,6 @@
           }
         ],
         "name": "DistPercentageUpdate",
-        "type": "event"
-      },
-      {
-        "anonymous": false,
-        "inputs": [
-          {
-            "indexed": false,
-            "name": "newMinWaitBlocks",
-            "type": "uint256"
-          },
-          {
-            "indexed": false,
-            "name": "oldMinWaitBlocks",
-            "type": "uint256"
-          }
-        ],
-        "name": "MinWaitBlocksUpdate",
-        "type": "event"
-      },
-      {
-        "anonymous": false,
-        "inputs": [
-          {
-            "indexed": false,
-            "name": "hash",
-            "type": "bytes32"
-          },
-          {
-            "indexed": false,
-            "name": "newStage",
-            "type": "uint8"
-          },
-          {
-            "indexed": false,
-            "name": "oldStage",
-            "type": "uint8"
-          },
-          {
-            "indexed": false,
-            "name": "blockNumber",
-            "type": "uint256"
-          }
-        ],
-        "name": "StageChange",
-        "type": "event"
-      },
-      {
-        "anonymous": false,
-        "inputs": [
-          {
-            "indexed": false,
-            "name": "hash",
-            "type": "bytes32"
-          },
-          {
-            "indexed": false,
-            "name": "recepient",
-            "type": "address"
-          },
-          {
-            "indexed": false,
-            "name": "fund",
-            "type": "uint256"
-          }
-        ],
-        "name": "Refund",
-        "type": "event"
-      },
-      {
-        "anonymous": false,
-        "inputs": [
-          {
-            "indexed": false,
-            "name": "hash",
-            "type": "bytes32"
-          },
-          {
-            "indexed": false,
-            "name": "committer",
-            "type": "address"
-          }
-        ],
-        "name": "Commit",
-        "type": "event"
-      },
-      {
-        "anonymous": false,
-        "inputs": [
-          {
-            "indexed": false,
-            "name": "hash",
-            "type": "bytes32"
-          },
-          {
-            "indexed": false,
-            "name": "revealor",
-            "type": "address"
-          },
-          {
-            "indexed": false,
-            "name": "worth",
-            "type": "uint8"
-          }
-        ],
-        "name": "Reveal",
-        "type": "event"
-      },
-      {
-        "anonymous": false,
-        "inputs": [
-          {
-            "indexed": false,
-            "name": "hash",
-            "type": "bytes32"
-          },
-          {
-            "indexed": false,
-            "name": "winner",
-            "type": "address"
-          },
-          {
-            "indexed": false,
-            "name": "worth",
-            "type": "uint8"
-          }
-        ],
-        "name": "Win",
-        "type": "event"
-      },
-      {
-        "anonymous": false,
-        "inputs": [
-          {
-            "indexed": false,
-            "name": "hash",
-            "type": "bytes32"
-          },
-          {
-            "indexed": false,
-            "name": "newRevealEndBlock",
-            "type": "uint256"
-          },
-          {
-            "indexed": false,
-            "name": "oldRevealEndBlock",
-            "type": "uint256"
-          }
-        ],
-        "name": "EarlyReveal",
         "type": "event"
       },
       {
@@ -1266,11 +1144,19 @@
             "type": "address"
           }
         ],
-        "name": "getPrize",
+        "name": "getResult",
         "outputs": [
           {
-            "name": "",
+            "name": "prize",
             "type": "uint256"
+          },
+          {
+            "name": "rewards",
+            "type": "uint256"
+          },
+          {
+            "name": "worth",
+            "type": "uint8"
           }
         ],
         "payable": false,
@@ -1323,20 +1209,6 @@
           }
         ],
         "name": "updateRewardRatios",
-        "outputs": [],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
-      },
-      {
-        "constant": false,
-        "inputs": [
-          {
-            "name": "_minWaitBlocks",
-            "type": "uint256"
-          }
-        ],
-        "name": "updateMinWaitBlocks",
         "outputs": [],
         "payable": false,
         "stateMutability": "nonpayable",
