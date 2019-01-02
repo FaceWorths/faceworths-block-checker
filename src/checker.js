@@ -28,7 +28,7 @@ const factory = contracts['FaceWorthPollFactory'];
 const factoryContract = tronWeb.contract(factory.abi, factory.address);
 
 function check(hash, block) {
-  console.log(new Date(), 'Checking Block Number for ', hash, 'at block', block);
+  console.log(new Date(), 'Checking Block Number for', hash, 'at block', block);
   factoryContract.checkBlockNumber(`0x${hash}`).send({
     shouldPollResponse: false,
     callValue: 0,
