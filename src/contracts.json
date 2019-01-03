@@ -1,5 +1,5 @@
 {"FaceToken": {
-  "address": "41fb2da3ea4e158e88319e3e8cbd03372044530f0c",
+  "address": "4196762228a653d2f0f6d9c1ca0076f6a5cf512e59",
   "abi": [
     {
       "constant": true,
@@ -301,7 +301,7 @@
     }
   ]},
   "FaceWorthPollFactory": {
-    "address": "41d083536fddba10bd8c39fdc0efcbc0b9a7a67988",
+    "address": "4111cffde33aafc153e74068585a01dd298f4f14f3",
     "abi": [
       {
         "constant": true,
@@ -766,11 +766,6 @@
             "indexed": false,
             "name": "oldStage",
             "type": "uint8"
-          },
-          {
-            "indexed": false,
-            "name": "blockNumber",
-            "type": "uint256"
           }
         ],
         "name": "StageChange",
