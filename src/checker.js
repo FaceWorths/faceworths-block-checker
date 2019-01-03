@@ -89,7 +89,7 @@ factoryContract.StageChange().watch((err, data) => {
 
 function updateEndedGames(games) {
   return games.filter((game) => {
-    let hasError = false;
+    let updated = false;
     factoryContract.getStatus(`0x${game.hash}`).call().then((data) => {
       console.log(game.hash, 'current stage is', data.currentStage);
       if(data.currentStage > 2) {
@@ -100,14 +100,13 @@ function updateEndedGames(games) {
           data.participantCount.toNumber(),
           data.revealCount.toNumber()).catch(e => {
           console.error(e);
-          hasError = true;
+          updated = true;
         });
       }
     }).catch(e => {
-      hasError = true;
       console.error(e);
     });
-    return hasError;
+    return !updated;
   });
 }
 
