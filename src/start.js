@@ -1,4 +1,5 @@
-// Transpile all code following this line with babel and use 'env' (aka ES6) preset.
+#!/usr/bin/env node
+
 require('babel-register')({
     presets: [ 'env' ]
 });
