@@ -23,7 +23,8 @@ const tronWeb = new Tronweb(
   network.privateKey
 );
 
-const contracts = require('./contracts.json');
+const contracts = args.network === 'mainnet' ?
+  require('./contracts.json') : require('./contracts-testnet.json');
 const factory = contracts['FaceWorthPollFactory'];
 const factoryContract = tronWeb.contract(factory.abi, factory.address);
 
