@@ -169,3 +169,5 @@ list({ 'status': '2' }, 1000).then((games) => {
   }
 });
 
+console.log(new Date(), 'started');
+
