@@ -1,16 +1,29 @@
 {
-  "name": "block-checker",
+  "name": "faceworths-block-checker",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "node src/start.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Fei Yang",
   "license": "MIT",
   "dependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/polyfill": "^7.2.5",
+    "apollo-boost": "^0.1.23",
+    "apollo-link-error": "^1.1.5",
+    "dotenv": "^6.2.0",
+    "graphql": "^14.0.2",
+    "graphql-tag": "^2.10.0",
+    "node-fetch": "^2.3.0",
     "tronweb": "^2.1.14",
     "yargs": "^12.0.5"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-regenerator": "^7.0.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0"
   }
 }
