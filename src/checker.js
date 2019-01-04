@@ -3,19 +3,13 @@ import Tronweb from 'tronweb';
 import { list, update } from './game.js';
 
 const config = require('./config.js');
-const args = require('yargs').argv;
 
-if (!args.network) {
-  console.error('network is not specified. e.g. --network=development');
-  process.exit();
-}
-
-if (!process.env.endPoint || !process.env.jwt) {
+if (!process.env.endPoint || !process.env.jwt || !process.env.network) {
   console.error('Environment variables are missing');
   process.exit();
 }
 
-const network = config.networks[args.network];
+const network = config.networks[process.env.network];
 const tronWeb = new Tronweb(
   network.fullHost,
   network.fullHost,
@@ -23,7 +17,7 @@ const tronWeb = new Tronweb(
   network.privateKey
 );
 
-const contracts = args.network === 'mainnet' ?
+const contracts = (process.env.network === 'mainnet') ?
   require('./contracts.json') : require('./contracts-testnet.json');
 const factory = contracts['FaceWorthPollFactory'];
 const factoryContract = tronWeb.contract(factory.abi, factory.address);
