@@ -7,7 +7,6 @@ import {
 } from 'apollo-boost';
 import { onError } from "apollo-link-error";
 
-require('dotenv').config();
 global.fetch = require('node-fetch');
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {

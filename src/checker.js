@@ -2,6 +2,8 @@ import "@babel/polyfill";
 import Tronweb from 'tronweb';
 import { list, update } from './game.js';
 
+require('dotenv').config();
+
 const config = require('./config.js');
 
 if (!process.env.endPoint || !process.env.jwt || !process.env.network) {
