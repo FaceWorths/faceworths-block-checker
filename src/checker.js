@@ -34,8 +34,7 @@ function check(hash, block) {
 }
 
 factoryContract.FaceWorthPollCreated().watch((err, data) => {
-  if (err) return console.error('Failed to bind event listener:', err);
-  if (data) {
+  if (!err && data) {
     let { result } = data;
     console.log(new Date(), 'Detected new poll:', result);
     let checkPointOne = Number(result.commitEndBlock) + 1;
@@ -62,8 +61,7 @@ factoryContract.FaceWorthPollCreated().watch((err, data) => {
 });
 
 factoryContract.StageChange().watch((err, data) => {
-  if (err) return console.error('Failed to bind event listener:', err);
-  if (data) {
+  if (!err && data) {
     let { result } = data;
     if (result.newStage > '2') {
       factoryContract.getStatus(`0x${result.hash}`).call().then((data) => {
